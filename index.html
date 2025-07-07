@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Birhattan Meryeme 😊</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Kalp animasyonu için */
+        .heart {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            animation: fall 3s linear infinite;
+            color: orange;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💖 Bir süredir sana sormak istediğim bir şey var 😊 💖</h1>
+        <p class="question">Benimle çıkar mısınn? 😊😊</p>
+
+        <div class="buttons" id="mainButtons">
+            <button id="yesButton">Evet 😊</button>
+            <button id="noButton">Hayır 😢</button>
+        </div>
+
+        <div class="buttons" id="finalButton" style="display: none;">
+            <button id="okButton">Tamam</button>
+        </div>
+
+        <p id="responseText"></p>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesButton');
+        const noBtn = document.getElementById('noButton');
+        const okBtn = document.getElementById('okButton');
+        const response = document.getElementById('responseText');
+        const mainButtons = document.getElementById('mainButtons');
+        const finalButton = document.getElementById('finalButton');
+
+        let noClickCount = 0;
+
+        yesBtn.addEventListener('click', () => {
+            mainButtons.style.display = "none";
+            response.textContent = "İşte bu be işte buu İİYYEEEEEEAAAĞĞĞĞHHH ❤️ Seni mutlu etmek için elimden geleni yapacam sevgilimm :))";
+            createHeartRain(); // Kalp yağmuru başlasın
+        });
+
+        noBtn.addEventListener('click', () => {
+            noClickCount++;
+
+
+            if (noClickCount === 4) {
+                response.textContent = "En azından deneyebiliriz hadi be evet de 🙏";
+            } else if (noClickCount < 4) {
+                response.textContent = "Yaa hadi be bir daha düşünn 😊";
+            } else {
+                mainButtons.style.display = "none";
+                finalButton.style.display = "flex";
+                response.textContent = "Olsunn, yine de seni hep sevecem 💔 Eğer fikrin değişirse haber ver lütfen 🌟";
+            }
+        });
+
+        okBtn.addEventListener('click', () => {
+            window.close();
+        });
+
+        // ❤️ Kalp Yağmuru Fonksiyonu
+        function createHeartRain() {
+            const heartInterval = setInterval(() => {
+                const heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.textContent = "🧡";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.fontSize = Math.random() * 20 + 16 + "px";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }, 200);
+
+            // Kalp yağmuru 6 saniye sonra dursun
+            setTimeout(() => {
+                clearInterval(heartInterval);
+            }, 6000);
+        }
+    </script>
+</body>
+</html>
